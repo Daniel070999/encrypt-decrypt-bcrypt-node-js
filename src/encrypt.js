@@ -8,7 +8,7 @@ function encrypt(text, key) {
         let encrypted = cipher.update(text);
         encrypted = Buffer.concat([encrypted, cipher.final()]);
 
-        return ('Palabra encriptada: ' + iv.toString('hex') + ':' + encrypted.toString('hex'));
+        return ('Encrypted word: ' + iv.toString('hex') + ':' + encrypted.toString('hex'));
     } catch (error) {
         console.log('error: ' + error);
         return (error);

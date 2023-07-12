@@ -10,7 +10,7 @@ function decrypt(text, key) {
 
         decrypted = Buffer.concat([decrypted, decipher.final()])
 
-        return ('Palabra desencriptada: ' + decrypted.toString());
+        return ('Decrypted word: ' + decrypted.toString());
     } catch (error) {
         console.log('error: ' + error);
         return (error);
