@@ -11,6 +11,7 @@
     "node",
     "js",
     "bcrypt",
+    "crypto",
     "encrypt",
     "decrypt",
     "nodejs"

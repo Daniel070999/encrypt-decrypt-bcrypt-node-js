@@ -6,19 +6,30 @@ const Decrypt = require('../src/decrypt');
 
 const port = 3000;
 
-//defaultKey = '12345698754124879548752101254-32';
+//defaultKey for crypto= '12345698754124879548752101254-32';
 
-app.use('/encrypt/:texttoencrypt/:key', function (req, res) {
-    const texto = req.params['texttoencrypt'];
-    const clave = req.params['key'];
-
-    res.end(Encrypt.encrypt(texto, clave));
+app.use('/crypto/encrypt', function (req, res) {
+    const texto = req.headers.text;
+    const clave = req.headers.key;
+    Encrypt.encryptWithCrypto(texto, clave, res);
 });
-app.use('/decrypt/:texttodecrypt/:key', function (req, res) {
-    const texto = req.params['texttodecrypt'];
-    const clave = req.params['key'];
 
-    res.end(Decrypt.decrypt(texto, clave));
+app.use('/bcrypt/encrypt', function (req, res) {
+    const word = req.headers.text;
+    Encrypt.encryptWithBcrypt(word, res);
+});
+
+app.use('/crypto/decrypt', function (req, res) {
+    const texto = req.headers.text;
+    const clave = req.headers.key;
+
+    Decrypt.decrypt(texto, clave, res);
+});
+
+app.use('/bcrypt/compare', function (req, res) {
+    const word = req.headers.text;
+    const hash = req.headers.hash;
+    Decrypt.compare(word, hash, res);
 });
 
 app.listen(port, () => {
